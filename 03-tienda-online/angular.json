@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-angular": {
+    "tienda-online": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -14,7 +14,6 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -59,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "app-angular:build:production"
+              "buildTarget": "tienda-online:build:production"
             },
             "development": {
-              "buildTarget": "app-angular:build:development"
+              "buildTarget": "tienda-online:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +72,6 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -83,18 +81,11 @@
             ],
             "styles": ["src/styles.css"]
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false,
-    "schematicCollections": ["angular-eslint"]
+    "analytics": false
   }
 }

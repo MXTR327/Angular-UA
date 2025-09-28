@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center">
+  <div>
+    <div class="mb-3">
+      <label for="inputTexto">Escribe Algo:</label>
+      <input
+        id="inputTexto"
+        type="text"
+        (input)="actualizarTexto(inputTexto.value)"
+        #inputTexto
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="replicarTexto">Texto Replicado:</label>
+      <input id="replicarTexto" type="text" [value]="texto()" readonly />
+    </div>
+  </div>
+</div>

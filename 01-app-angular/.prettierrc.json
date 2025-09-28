@@ -1,5 +1,8 @@
 {
   "arrowParens": "avoid",
+  "attributeGroups": [
+    "$CODE_GUIDE"
+  ],
   "braceStyle": "allman",
   "overrides": [
     {
@@ -15,7 +18,7 @@
     "prettier-plugin-organize-attributes",
     "prettier-plugin-merge"
   ],
-  "attributeGroups": ["$CODE_GUIDE"],
+  "printWidth": 80,
   "semi": true,
   "singleQuote": true,
   "tabWidth": 2,
