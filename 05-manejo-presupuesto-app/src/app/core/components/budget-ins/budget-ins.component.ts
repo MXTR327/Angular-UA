@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-
-import { BudgetService } from '../../services/budget.service';
+import { ITransaccion } from '@core/interfaces/transaccion.interface';
+import { IngresosService } from '@core/services/ingresos.service';
 
 @Component({
   selector: 'app-budget-ins',
@@ -11,9 +11,9 @@ import { BudgetService } from '../../services/budget.service';
 })
 export class BudgetInsComponent
 {
-  #budgetService = inject(BudgetService);
-  ingresos = this.#budgetService.ingresos;
+  #ingresosService = inject(IngresosService);
+  ingresos = this.#ingresosService.ingresos;
 
-  eliminarIngreso = (descripcion: string) =>
-    this.#budgetService.eliminarIngreso(descripcion);
+  eliminarIngreso = (ingreso: ITransaccion) =>
+    this.#ingresosService.eliminar(ingreso);
 }

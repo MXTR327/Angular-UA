@@ -1,31 +1,31 @@
 <h5 class="text-success">Agregar Nuevo Producto</h5>
 
 <form
-  class="d-flex justify-content-between align-items-center w-50 mx-auto gap-2"
+  class="w-50 d-flex flex-column mx-auto gap-2"
+  [formGroup]="formProducto"
   (ngSubmit)="agregarProducto()"
 >
-  <input
-    class="form-control w-75"
-    id="descripcion"
-    name="descripcion"
-    type="text"
-    autocomplete="off"
-    placeholder="Descripcion del producto"
-    [value]="descripcionIn()"
-    (input)="descripcionIn.set(descInput.value)"
-    #descInput
-  />
+  <div class="d-flex justify-content-between align-items-center gap-2">
+    <input
+      class="form-control w-75"
+      type="text"
+      autocomplete="off"
+      formControlName="descripcion"
+      placeholder="Descripcion del producto"
+    />
 
-  <input
-    class="form-control w-25"
-    id="precio"
-    name="precio"
-    type="number"
-    placeholder="Precio"
-    [value]="precioIn()"
-    (input)="precioIn.set(priceInput.valueAsNumber)"
-    #priceInput
-  />
+    <input
+      class="form-control w-25"
+      type="number"
+      formControlName="precio"
+      placeholder="Precio"
+    />
+  </div>
 
-  <button class="btn btn-primary" type="submit">Agregar</button>
+  <div class="d-flex justify-content-center gap-2">
+    <button class="btn btn-primary" type="submit">Agregar Producto</button>
+    <button class="btn btn-danger" type="button" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
 </form>

@@ -7,15 +7,14 @@
     >
       <span class="flex-grow-1">{{ egreso.descripcion }}</span>
       <span class="d-flex align-items-center mx-3">
-        <span class="text-danger">- {{ egreso.monto | currency }}</span>
+        <span class="text-danger">
+          {{ egreso.monto | currency: 'PEN' : 'S/. -' : '1.2-2' }}
+        </span>
         <span class="badge bg-success ms-2">
-          {{ egreso.porcentaje | percent }}
+          {{ calcularPorcentaje(egreso) | percent }}
         </span>
       </span>
-      <button
-        class="btn btn-sm btn-danger"
-        (click)="eliminarEgreso(egreso.descripcion)"
-      >
+      <button class="btn btn-sm btn-danger" (click)="eliminarEgreso(egreso)">
         <i class="bi bi-x-circle"></i>
       </button>
     </li>

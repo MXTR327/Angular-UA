@@ -5,10 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
-import { BudgetService } from '../../services/budget.service';
-
-// type transacionType = 'ingreso' | 'egreso';
+import { EgresosService } from '@core/services/egresos.service';
+import { IngresosService } from '@core/services/ingresos.service';
 
 @Component({
   selector: 'app-form-budget',
@@ -19,13 +17,15 @@ import { BudgetService } from '../../services/budget.service';
 export class FormBudgetComponent
 {
   #fb = inject(FormBuilder);
+
   formBudget: FormGroup = this.#fb.group({
     descripcion: ['', [Validators.required, Validators.minLength(3)]],
     monto: ['', [Validators.required, Validators.min(0.01)]],
     tipo: ['ingreso', [Validators.required]],
   });
 
-  #budgetService = inject(BudgetService);
+  #egresosService = inject(EgresosService);
+  #ingresoService = inject(IngresosService);
 
   agregarTransaccion(): void
   {
@@ -37,11 +37,17 @@ export class FormBudgetComponent
 
     if (this.formBudget.value.tipo === 'ingreso')
     {
-      this.#budgetService.agregarIngreso(this.formBudget.value);
+      this.#ingresoService.ingresos.set([
+        ...this.#ingresoService.ingresos(),
+        this.formBudget.value,
+      ]);
     }
     else
     {
-      this.#budgetService.agregarEgreso(this.formBudget.value);
+      this.#egresosService.egresos.set([
+        ...this.#egresosService.egresos(),
+        this.formBudget.value,
+      ]);
     }
   }
 }

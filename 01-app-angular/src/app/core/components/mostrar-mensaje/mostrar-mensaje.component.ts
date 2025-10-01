@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TitleService } from '@shared/services/title.service';
 
 @Component({
@@ -16,14 +12,16 @@ export class MostrarMensajeComponent
 {
   _ = inject(TitleService).title.set('Mostrar Mensaje');
 
-  mensaje = signal('');
+  #route = inject(ActivatedRoute);
+
+  mensaje = this.#route.snapshot.queryParamMap.get('mensaje') ?? '';
 
   mostrarMensaje()
   {
-    this.mensaje.set('Hola, has hecho click en el boton!');
+    this.mensaje = 'Hola, has hecho click en el boton!';
   }
   resetearMensaje()
   {
-    this.mensaje.set('');
+    this.mensaje = this.#route.snapshot.queryParamMap.get('mensaje') ?? '';
   }
 }

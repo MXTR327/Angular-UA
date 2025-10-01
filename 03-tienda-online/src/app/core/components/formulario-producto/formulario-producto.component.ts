@@ -1,42 +1,64 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Producto } from '@core/interfaces/producto.interface';
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '@core/services/products.service';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-formulario-producto',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './formulario-producto.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormularioProductoComponent
 {
-  descripcionIn = signal<string>('');
-  precioIn = signal<null | number>(null);
+  #fb = inject(FormBuilder);
+  formProducto: FormGroup = this.#fb.group({
+    descripcion: ['', [Validators.required, Validators.minLength(3)]],
+    id: [0, [Validators.required, Validators.min(1)]],
+    precio: [0, [Validators.required, Validators.min(1)]],
+  });
 
   #productsService = inject(ProductsService);
+  #route = inject(ActivatedRoute);
+
+  #router = inject(Router);
+
+  constructor()
+  {
+    toSignal(
+      this.#route.params.pipe(
+        map(({ id }) => this.#productsService.getProductById(Number(id))),
+        tap(producto =>
+        {
+          this.formProducto.patchValue(producto ?? []);
+        })
+      )
+    );
+  }
 
   agregarProducto()
   {
-    if (this.descripcionIn().trim() === '' || (this.precioIn() ?? 0) <= 0)
+    if (this.formProducto.invalid)
     {
       alert('Por favor, ingrese una descripcion y un precio valido');
       return;
     }
 
-    const producto: Producto = {
-      descripcion: this.descripcionIn(),
-      precio: this.precioIn() ?? 0,
-    };
+    this.#productsService.agregarProducto(this.formProducto.value);
 
-    this.#productsService.agregarProducto(producto);
+    this.formProducto.reset();
+    this.#router.navigate(['/']);
+  }
 
-    this.descripcionIn.set('');
-    this.precioIn.set(null);
+  cancelar()
+  {
+    this.#router.navigate(['/']);
   }
 }

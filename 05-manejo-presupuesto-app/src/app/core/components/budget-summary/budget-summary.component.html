@@ -2,22 +2,22 @@
   <div class="border-primary rounded border p-4 text-center">
     <h4 class="mb-3">Presupuesto Disponible:</h4>
     <div class="display-3 fw-bold text-warning">
-      {{ presupuestoTotal() | currency }}
+      {{ presupuestoTotal() | currency: 'PEN' : 'S/. ' : '1.2-2' }}
     </div>
     <div class="row justify-content-center mt-4">
       <div class="col-md-5 text-center">
         <div class="text-uppercase">INGRESOS</div>
         <div class="text-success h5">
-          {{ presupuestoIngresos() | currency }}
+          {{ ingresoTotal() | currency: 'PEN' : 'S/. ' : '1.2-2' }}
         </div>
       </div>
       <div class="col-md-5 text-center">
         <div class="text-uppercase">EGRESOS</div>
         <div class="text-danger h5">
-          {{ presupuestoEgresos() | currency }}
-          <span class="badge bg-success ms-2">{{
-            porcentajeEgreso() | percent
-          }}</span>
+          {{ egresoTotal() | currency: 'PEN' : 'S/. ' : '1.2-2' }}
+          <span class="badge bg-success ms-2">
+            {{ porcentajeTotal() | percent }}
+          </span>
         </div>
       </div>
     </div>

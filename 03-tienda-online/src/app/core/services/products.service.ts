@@ -6,16 +6,27 @@ import { Producto } from '@core/interfaces/producto.interface';
 })
 export class ProductsService
 {
-  detalleProducto = signal<Producto | undefined>(undefined);
+  public productos = signal<Producto[]>([]);
+  // Variable para el id
+  #idSiguiente = 1;
 
-  public productos = signal<Producto[]>([
-    { descripcion: 'Pantalon', precio: 130 },
-    { descripcion: 'Camisa', precio: 80 },
-    { descripcion: 'Playera', precio: 50 },
-  ]);
-
-  agregarProducto(producto: Producto)
+  constructor()
   {
+    this.#inicializarProductos();
+  }
+
+  agregarProducto = (producto: Producto) =>
     this.productos.set([...this.productos(), producto]);
+
+  getProductById = (id: number): Producto | undefined =>
+    this.productos().find(producto => producto.id === id);
+
+  #inicializarProductos()
+  {
+    this.productos.set([
+      { descripcion: 'Producto 1', id: this.#idSiguiente++, precio: 100 },
+      { descripcion: 'Producto 2', id: this.#idSiguiente++, precio: 200 },
+      { descripcion: 'Producto 3', id: this.#idSiguiente++, precio: 300 },
+    ]);
   }
 }

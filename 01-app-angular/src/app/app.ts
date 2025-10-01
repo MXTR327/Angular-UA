@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { EjemploPipesComponent } from "@core/components/ejemplo-pipes/ejemplo-pipes.component";
-import { ListadoUsuariosComponent } from '@core/components/listado-usuarios/listado-usuarios.component';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { MensajeService } from '@shared/services/mensaje.service';
 import { TitleService } from '@shared/services/title.service';
 
-
 @Component({
   selector: 'app-root',
-  imports: [ListadoUsuariosComponent, EjemploPipesComponent],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

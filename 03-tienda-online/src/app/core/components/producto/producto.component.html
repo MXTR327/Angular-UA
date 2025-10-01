@@ -1,11 +1,12 @@
 <li class="list-group-item">
-  {{ producto().descripcion }}, ${{ producto().precio }}
+  id: {{ producto().id }}, {{ producto().descripcion }},
+  {{ producto().precio | currency: 'PEN' : 'S/. ' : '1.2-2' }}
 
   <button
     class="btn btn-info ms-4"
     type="submit"
-    (click)="emitirDetalleProducto()"
+    (click)="editarProducto(producto().id)"
   >
-    Ver Detalle
+    Editar Producto
   </button>
 </li>

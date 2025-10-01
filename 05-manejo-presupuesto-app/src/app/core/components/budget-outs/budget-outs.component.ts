@@ -1,6 +1,12 @@
 import { CurrencyPipe, PercentPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { BudgetService } from '@core/services/budget.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
+import { ITransaccion } from '@core/interfaces/transaccion.interface';
+import { EgresosService } from '@core/services/egresos.service';
 
 @Component({
   selector: 'app-budget-outs',
@@ -10,10 +16,16 @@ import { BudgetService } from '@core/services/budget.service';
 })
 export class BudgetOutsComponent
 {
-  #budgetService = inject(BudgetService);
-
+  #budgetService = inject(EgresosService);
   egresos = this.#budgetService.egresos;
 
-  eliminarEgreso = (descripcion: string) =>
-    this.#budgetService.eliminarEgreso(descripcion);
+  ingresoTotal = input.required<number>();
+
+  calcularPorcentaje = (egreso: ITransaccion) =>
+  {
+    return egreso.monto / this.ingresoTotal();
+  };
+
+  eliminarEgreso = (egreso: ITransaccion) =>
+    this.#budgetService.eliminar(egreso);
 }

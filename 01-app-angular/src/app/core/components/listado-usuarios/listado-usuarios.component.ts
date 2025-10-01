@@ -17,6 +17,7 @@ export class ListadoUsuariosComponent
   #usuariosService = inject(UsuariosService);
 
   usersResource = rxResource<User[], void>({
+    defaultValue: [],
     params: () => ({}),
     stream: () => this.#usuariosService.obtenerDatos(),
   });

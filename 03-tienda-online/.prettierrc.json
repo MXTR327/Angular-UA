@@ -1,6 +1,7 @@
 {
   "arrowParens": "avoid",
-  "attributeGroups": ["$CODE_GUIDE"],
+  "attributeGroups": ["$CODE_GUIDE", "^\\[", "^\\("],
+  "attributeSort": "asc",
   "braceStyle": "allman",
   "overrides": [
     {

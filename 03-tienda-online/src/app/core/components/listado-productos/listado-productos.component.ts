@@ -1,18 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductsService } from '@core/services/products.service';
 
-import { FormularioProductoComponent } from '../formulario-producto/formulario-producto.component';
 import { ProductoComponent } from '../producto/producto.component';
 
 @Component({
   selector: 'app-listado-productos',
-  imports: [ProductoComponent, FormsModule, FormularioProductoComponent],
+  imports: [ProductoComponent, FormsModule],
   templateUrl: './listado-productos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,15 +16,10 @@ export class ListadoProductosComponent
   #productsService = inject(ProductsService);
   productos = this.#productsService.productos;
 
-  constructor()
+  #router = inject(Router);
+
+  agregarProducto()
   {
-    effect(() =>
-    {
-      const detalleProd = this.#productsService.detalleProducto();
-      if (detalleProd === undefined) return;
-      alert(
-        `Producto: ${detalleProd.descripcion}, Precio: $${detalleProd.precio}`
-      );
-    });
+    this.#router.navigate(['agregar']);
   }
 }

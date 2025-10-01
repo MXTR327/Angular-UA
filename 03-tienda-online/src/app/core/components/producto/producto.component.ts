@@ -1,26 +1,26 @@
+import { CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   input,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Producto } from '@core/interfaces/producto.interface';
-import { ProductsService } from '@core/services/products.service';
 
 @Component({
   selector: 'app-producto',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './producto.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductoComponent
 {
-  public producto = input.required<Producto>();
+  producto = input.required<Producto>();
 
-  #productsService = inject(ProductsService);
-
-  emitirDetalleProducto()
+  #router = inject(Router);
+  editarProducto(id: number)
   {
-    this.#productsService.detalleProducto.set(this.producto());
+    this.#router.navigate(['/editar', id]);
   }
 }

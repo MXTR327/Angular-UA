@@ -2,11 +2,15 @@
   <div class="col-md-8">
     <form
       class="row g-2"
-      (ngSubmit)="agregarTransaccion()"
       [formGroup]="formBudget"
+      (ngSubmit)="agregarTransaccion()"
     >
       <div class="col-auto">
-        <select class="form-select bg-success" formControlName="tipo">
+        <select
+          class="form-select bg-success"
+          [class.bg-danger]="formBudget.value.tipo === 'egreso'"
+          formControlName="tipo"
+        >
           <option value="ingreso">+</option>
           <option value="egreso">-</option>
         </select>
@@ -16,8 +20,9 @@
         <input
           class="form-control border-success"
           type="text"
-          placeholder="Descripción"
+          [class.border-danger]="formBudget.value.tipo === 'egreso'"
           formControlName="descripcion"
+          placeholder="Descripción"
         />
       </div>
 
@@ -25,13 +30,18 @@
         <input
           class="form-control border-success"
           type="number"
-          placeholder="Valor"
+          [class.border-danger]="formBudget.value.tipo === 'egreso'"
           formControlName="monto"
+          placeholder="Valor"
         />
       </div>
 
       <div class="col-auto">
-        <button class="btn btn-success" type="submit">
+        <button
+          class="btn btn-success"
+          type="submit"
+          [class.btn-danger]="formBudget.value.tipo === 'egreso'"
+        >
           <i class="bi bi-check-circle"></i>
         </button>
       </div>

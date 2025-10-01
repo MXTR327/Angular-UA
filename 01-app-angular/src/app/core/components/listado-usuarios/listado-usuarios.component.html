@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-md-6">
     <ul class="list-group">
-      @if (usersResource.value()!.length > 0)
+      @if (usersResource.value().length > 0)
       {
         @for (usuario of usersResource.value(); track usuario.id)
         {

@@ -4,9 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@core/*": [
-        "./src/app/core/*"
-      ],
+      "@core/*": ["./src/app/core/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

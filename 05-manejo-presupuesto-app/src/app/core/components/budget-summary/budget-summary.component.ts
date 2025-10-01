@@ -1,6 +1,5 @@
 import { CurrencyPipe, PercentPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { BudgetService } from '@core/services/budget.service';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-budget-summary',
@@ -10,9 +9,8 @@ import { BudgetService } from '@core/services/budget.service';
 })
 export class BudgetSummaryComponent
 {
-  #budgetService = inject(BudgetService);
-  porcentajeEgreso = this.#budgetService.porcentajeEgreso;
-  presupuestoEgresos = this.#budgetService.presupuestoEgresos;
-  presupuestoIngresos = this.#budgetService.presupuestoIngresos;
-  presupuestoTotal = this.#budgetService.presupuestoTotal;
+  egresoTotal = input.required<number>();
+  ingresoTotal = input.required<number>();
+  porcentajeTotal = input.required<number>();
+  presupuestoTotal = input.required<number>();
 }

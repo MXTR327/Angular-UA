@@ -1,13 +1,16 @@
 <div class="container my-5">
-  <app-budget-summary />
+  <!-- Cabezera -->
+  <app-budget-summary
+    [egresoTotal]="getEgresoTotal()"
+    [ingresoTotal]="getIngresoTotal()"
+    [porcentajeTotal]="getPorcetajeTotal()"
+    [presupuestoTotal]="getPresupuestoTotal()"
+  />
+  <!-- Formulario -->
   <app-form-budget />
-
+  <!-- Ingresos y Egresos -->
   <div class="row mt-4">
-    <div class="col-md-6">
-      <app-budget-ins />
-    </div>
-    <div class="col-md-6">
-      <app-budget-outs />
-    </div>
+    <app-budget-ins class="col-md-6" />
+    <app-budget-outs class="col-md-6" [ingresoTotal]="getIngresoTotal()" />
   </div>
 </div>

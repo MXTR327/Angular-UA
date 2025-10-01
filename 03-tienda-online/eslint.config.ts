@@ -2,8 +2,9 @@ import js from '@eslint/js';
 import angularEsl from 'angular-eslint';
 import prettierConf from 'eslint-config-prettier';
 import perfectionistPlug from 'eslint-plugin-perfectionist';
-import prettierPlug from 'eslint-plugin-prettier';
+import prettier from 'eslint-plugin-prettier';
 import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
@@ -15,8 +16,9 @@ export default defineConfig([
       ...angularEsl.configs.tsRecommended,
       perfectionistPlug.configs['recommended-natural'],
     ],
-    files: ['**/*.ts'],
-    plugins: { prettier: prettierPlug },
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    languageOptions: { globals: globals.browser },
+    plugins: { js, prettier },
     processor: angularEsl.processInlineTemplates,
     rules: {
       ...prettierConf.rules,
@@ -51,7 +53,7 @@ export default defineConfig([
       ...(angularEsl.configs.templateAccessibility as never),
     ],
     files: ['**/*.html'],
-    plugins: { prettier: prettierPlug },
+    plugins: { prettier },
     rules: { ...prettierConf.rules },
   },
 ]);
