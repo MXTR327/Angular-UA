@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <ul class="list-group">
+      @if (usersResource.value()!.length > 0)
+      {
+        @for (usuario of usersResource.value(); track usuario.id)
+        {
+          <li class="list-group-item">{{ usuario.id }} {{ usuario.name }}</li>
+        }
+      }
+      @else
+      {
+        <li class="list-group-item text-danger">No hay usuarios</li>
+      }
+    </ul>
+  </div>
+</div>

@@ -1,27 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { NuevoComponenteComponent } from './components/nuevo-componente/nuevo-componente.component';
-import { ComponenteEnLineaComponent } from './components/componente-en-linea/componente-en-linea.component';
-import { InterpolacionComponent } from './components/interpolacion/interpolacion.component';
-import { ComponentePadreComponent } from './components/componente-padre/componente-padre.component';
-import { ComponenteHijoComponent } from "./components/componente-padre/componente-hijo/componente-hijo.component";
-import { MostrarMensajeComponent } from "./components/mostrar-mensaje/mostrar-mensaje.component";
-import { ReplicadorComponent } from "./components/replicador/replicador.component";
+import { Component, inject } from '@angular/core';
+import { EjemploPipesComponent } from "@core/components/ejemplo-pipes/ejemplo-pipes.component";
+import { ListadoUsuariosComponent } from '@core/components/listado-usuarios/listado-usuarios.component';
+import { MensajeService } from '@shared/services/mensaje.service';
+import { TitleService } from '@shared/services/title.service';
+
 
 @Component({
   selector: 'app-root',
-  imports: [
-    NuevoComponenteComponent,
-    ComponenteEnLineaComponent,
-    InterpolacionComponent,
-    ComponentePadreComponent,
-    ComponenteHijoComponent,
-    MostrarMensajeComponent,
-    ReplicadorComponent
-],
+  imports: [ListadoUsuariosComponent, EjemploPipesComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App
 {
-  protected readonly title = signal('Property Binding en Angular');
+  // Servicios en Angular
+  #mensajeService = inject(MensajeService);
+  mensaje = this.#mensajeService.obtenerMensaje();
+
+  #titleService = inject(TitleService);
+  protected readonly title = this.#titleService.title;
 }

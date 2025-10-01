@@ -1,0 +1,31 @@
+<h5 class="text-success">Agregar Nuevo Producto</h5>
+
+<form
+  class="d-flex justify-content-between align-items-center w-50 mx-auto gap-2"
+  (ngSubmit)="agregarProducto()"
+>
+  <input
+    class="form-control w-75"
+    id="descripcion"
+    name="descripcion"
+    type="text"
+    autocomplete="off"
+    placeholder="Descripcion del producto"
+    [value]="descripcionIn()"
+    (input)="descripcionIn.set(descInput.value)"
+    #descInput
+  />
+
+  <input
+    class="form-control w-25"
+    id="precio"
+    name="precio"
+    type="number"
+    placeholder="Precio"
+    [value]="precioIn()"
+    (input)="precioIn.set(priceInput.valueAsNumber)"
+    #priceInput
+  />
+
+  <button class="btn btn-primary" type="submit">Agregar</button>
+</form>

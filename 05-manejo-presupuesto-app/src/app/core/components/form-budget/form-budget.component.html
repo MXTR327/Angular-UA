@@ -1,0 +1,40 @@
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <form
+      class="row g-2"
+      (ngSubmit)="agregarTransaccion()"
+      [formGroup]="formBudget"
+    >
+      <div class="col-auto">
+        <select class="form-select bg-success" formControlName="tipo">
+          <option value="ingreso">+</option>
+          <option value="egreso">-</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <input
+          class="form-control border-success"
+          type="text"
+          placeholder="Descripción"
+          formControlName="descripcion"
+        />
+      </div>
+
+      <div class="col-auto">
+        <input
+          class="form-control border-success"
+          type="number"
+          placeholder="Valor"
+          formControlName="monto"
+        />
+      </div>
+
+      <div class="col-auto">
+        <button class="btn btn-success" type="submit">
+          <i class="bi bi-check-circle"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

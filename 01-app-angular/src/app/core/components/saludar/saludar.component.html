@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-center">
+  <div class="w-50">
+    <div class="mb-3">
+      <label class="mx-2" for="inputTexto">Mensaje:</label>
+      <input
+        class="form-control"
+        id="inputTexto"
+        type="text"
+        autocomplete="off"
+        [value]="saludo"
+      />
+    </div>
+
+    <div class="mb-3">
+      <div class="alert alert-success w-50 mx-auto mt-4">
+        {{ saludo }}
+      </div>
+    </div>
+  </div>
+</div>

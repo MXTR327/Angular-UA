@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-center">
+    <div class="w-25 d-flex flex-column gap-3">
+      <app-form-calculadora (resultado)="manejarResultado($event)" />
+
+      <app-resultado [resultado]="resultado()" />
+    </div>
+  </div>
+</div>
