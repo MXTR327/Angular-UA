@@ -1,32 +1,56 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Producto } from '@core/interfaces/producto.interface';
+
+import { DatosService } from './datos.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService
 {
-  public productos = signal<Producto[]>([]);
-  // Variable para el id
-  #idSiguiente = 1;
+  public productos = signal<Record<string, Producto>>({});
+  #datosService = inject(DatosService);
 
   constructor()
   {
-    this.#inicializarProductos();
+    this.loadProductos();
   }
 
-  agregarProducto = (producto: Producto) =>
-    this.productos.set([...this.productos(), producto]);
-
-  getProductById = (id: number): Producto | undefined =>
-    this.productos().find(producto => producto.id === id);
-
-  #inicializarProductos()
+  eliminarProducto = (llave: string) =>
   {
-    this.productos.set([
-      { descripcion: 'Producto 1', id: this.#idSiguiente++, precio: 100 },
-      { descripcion: 'Producto 2', id: this.#idSiguiente++, precio: 200 },
-      { descripcion: 'Producto 3', id: this.#idSiguiente++, precio: 300 },
-    ]);
+    this.#datosService
+      .eliminarProducto(llave)
+      .subscribe(() => this.loadProductos());
+  };
+
+  getProductByLlave(llave: string): Producto | undefined
+  {
+    return this.productos()[llave];
+  }
+
+  // Agregar o Modificar Producto
+  guardarProducto(producto: Producto, llave: null | string = null)
+  {
+    if (!llave)
+    {
+      this.#datosService
+        .agregarProducto(producto)
+        .subscribe(() => this.loadProductos());
+    }
+    else
+    {
+      this.#datosService
+        .modificarProducto(producto, llave)
+        .subscribe(() => this.loadProductos());
+    }
+  }
+
+  loadProductos()
+  {
+    this.#datosService
+      .listarProductos()
+      .subscribe((productos: Record<string, Producto>) =>
+        this.productos.set(productos)
+      );
   }
 }

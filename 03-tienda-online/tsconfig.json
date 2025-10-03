@@ -4,7 +4,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@core/*": ["./src/app/core/*"]
+      "@core/*": [
+        "./src/app/core/*"
+      ],
+      "@environments/*": [
+        "./src/environments/*"
+      ],
     },
     "strict": true,
     "noImplicitOverride": true,

@@ -16,11 +16,12 @@ import { Producto } from '@core/interfaces/producto.interface';
 })
 export class ProductoComponent
 {
+  llave = input.required<string>();
   producto = input.required<Producto>();
 
   #router = inject(Router);
-  editarProducto(id: number)
+  editarProducto()
   {
-    this.#router.navigate(['/editar', id]);
+    this.#router.navigate(['/editar', this.llave()]);
   }
 }

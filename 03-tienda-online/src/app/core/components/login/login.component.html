@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center align-items-center container">
+  <div class="card p-4 shadow-sm" style="width: 25rem">
+    <h3 class="mb-4 text-center">Iniciar Sesion</h3>
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+      <!-- Campo de email -->
+      <div class="mb-3">
+        <input
+          class="form-control"
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+      </div>
+
+      <!-- Campo de contraseña -->
+      <div class="mb-3">
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+          placeholder="Contraseña"
+        />
+      </div>
+
+      <!-- Boton login -->
+      <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+    </form>
+  </div>
+</div>

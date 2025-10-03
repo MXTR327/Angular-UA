@@ -22,4 +22,13 @@ export class ListadoProductosComponent
   {
     this.#router.navigate(['agregar']);
   }
+
+  obtenerLlaves(): string[]
+  {
+    if (this.productos())
+    {
+      return Object.keys(this.productos());
+    }
+    return [];
+  }
 }

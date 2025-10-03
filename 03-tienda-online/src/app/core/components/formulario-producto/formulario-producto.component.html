@@ -1,4 +1,4 @@
-<h5 class="text-success">Agregar Nuevo Producto</h5>
+<h5 class="text-success">Detalle Producto</h5>
 
 <form
   class="w-50 d-flex flex-column mx-auto gap-2"
@@ -23,7 +23,19 @@
   </div>
 
   <div class="d-flex justify-content-center gap-2">
-    <button class="btn btn-primary" type="submit">Agregar Producto</button>
+    <button class="btn btn-primary" type="submit">Guardar Producto</button>
+
+    @if (llaveProducto())
+    {
+      <button
+        class="btn btn-warnings"
+        type="button"
+        (click)="eliminarProducto()"
+      >
+        Eliminar Producto
+      </button>
+    }
+
     <button class="btn btn-danger" type="button" (click)="cancelar()">
       Cancelar
     </button>

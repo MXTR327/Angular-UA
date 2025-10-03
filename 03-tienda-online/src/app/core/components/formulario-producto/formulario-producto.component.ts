@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
@@ -8,8 +13,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '@core/services/products.service';
-import { map, tap } from 'rxjs';
-
+import { map } from 'rxjs';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-formulario-producto',
   imports: [ReactiveFormsModule],
@@ -21,27 +26,35 @@ export class FormularioProductoComponent
   #fb = inject(FormBuilder);
   formProducto: FormGroup = this.#fb.group({
     descripcion: ['', [Validators.required, Validators.minLength(3)]],
-    id: [0, [Validators.required, Validators.min(1)]],
-    precio: [0, [Validators.required, Validators.min(1)]],
+    precio: [0, [Validators.required, Validators.min(0)]],
   });
 
+  llaveProducto = signal<string>('');
+
+  #activatedRoute = inject(ActivatedRoute);
+
+  #productLlave = toSignal(
+    this.#activatedRoute.params.pipe(map(({ llave }) => llave))
+  );
+
   #productsService = inject(ProductsService);
-  #route = inject(ActivatedRoute);
+  productsResource = rxResource({
+    params: () => ({ llave: this.#productLlave() }),
+    stream: ({ params }) =>
+      of(this.#productsService.getProductByLlave(params.llave)).pipe(
+        map(producto =>
+        {
+          if (producto)
+          {
+            this.formProducto.patchValue(producto);
+            this.llaveProducto.set(params.llave);
+          }
+          return producto;
+        })
+      ),
+  });
 
   #router = inject(Router);
-
-  constructor()
-  {
-    toSignal(
-      this.#route.params.pipe(
-        map(({ id }) => this.#productsService.getProductById(Number(id))),
-        tap(producto =>
-        {
-          this.formProducto.patchValue(producto ?? []);
-        })
-      )
-    );
-  }
 
   agregarProducto()
   {
@@ -51,7 +64,10 @@ export class FormularioProductoComponent
       return;
     }
 
-    this.#productsService.agregarProducto(this.formProducto.value);
+    this.#productsService.guardarProducto(
+      this.formProducto.value,
+      this.llaveProducto()
+    );
 
     this.formProducto.reset();
     this.#router.navigate(['/']);
@@ -60,5 +76,16 @@ export class FormularioProductoComponent
   cancelar()
   {
     this.#router.navigate(['/']);
+  }
+
+  eliminarProducto()
+  {
+    if (this.llaveProducto())
+    {
+      this.#productsService.eliminarProducto(this.llaveProducto());
+
+      this.formProducto.reset();
+      this.#router.navigate(['/']);
+    }
   }
 }
