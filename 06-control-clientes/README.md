@@ -1,6 +1,4 @@
-# TiendaOnline
-
-https://tienda-online-9e05d.web.app/login
+# ControlClientes
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
 
