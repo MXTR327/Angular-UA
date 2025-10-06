@@ -9,28 +9,27 @@ import { Observable } from 'rxjs';
 })
 export class DatosService
 {
-  #httpClient = inject(HttpClient);
+  #http = inject(HttpClient);
+
   #url = environment.firebaseConfig.databaseURL;
 
   agregarProducto(producto: Producto): Observable<object>
   {
-    return this.#httpClient.post(`${this.#url}/datos.json`, producto);
+    return this.#http.post(`${this.#url}/datos.json`, producto);
   }
 
   eliminarProducto(llave: string): Observable<object>
   {
-    return this.#httpClient.delete(`${this.#url}/datos/${llave}.json`);
+    return this.#http.delete(`${this.#url}/datos/${llave}.json`);
   }
 
   listarProductos(): Observable<Record<string, Producto>>
   {
-    return this.#httpClient.get<Record<string, Producto>>(
-      this.#url + '/datos.json'
-    );
+    return this.#http.get<Record<string, Producto>>(`${this.#url}/datos.json`);
   }
 
   modificarProducto(producto: Producto, llave: string): Observable<object>
   {
-    return this.#httpClient.put(`${this.#url}/datos/${llave}.json`, producto);
+    return this.#http.put(`${this.#url}/datos/${llave}.json`, producto);
   }
 }

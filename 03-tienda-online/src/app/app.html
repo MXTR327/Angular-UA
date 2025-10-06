@@ -1,5 +1,25 @@
 <div class="container mt-2 text-center">
   <h1 class="text-primary">{{ titulo() }}</h1>
   <!-- <app-listado-productos /> -->
+  <div class="d-flex justify-content-center">
+    @if (!isAuthenticated())
+    {
+      <a class="btn btn-outline-primary mx-2" [routerLink]="['/login']">
+        Login
+      </a>
+    }
+    @else
+    {
+      <a
+        class="btn btn-outline-danger mx-2"
+        role="button"
+        aria-disabled="true"
+        (click)="salir()"
+        style="cursor: pointer"
+      >
+        Salir
+      </a>
+    }
+  </div>
   <router-outlet />
 </div>

@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LoginService } from '@core/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,15 @@ export class LoginComponent
     password: ['', [Validators.required]],
   });
 
+  #loginService = inject(LoginService);
+
   login()
   {
     if (this.formLogin.invalid) return;
 
-    console.log(this.formLogin.value);
+    this.#loginService.login(
+      this.formLogin.value.email,
+      this.formLogin.value.password
+    );
   }
 }
