@@ -2,39 +2,64 @@ import { CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ClienteInterface } from '@control-clientes/interfaces/cliente.interface';
-
-import { ClientesService } from '../../services/clientes.service';
+import { ClientesService } from '@control-clientes/services/clientes.service';
 
 @Component({
   selector: 'app-clientes',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, ReactiveFormsModule],
   templateUrl: './clientes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientesComponent
 {
-  clientes = signal<ClienteInterface[] | null>(null);
-  #clientesService = inject(ClientesService);
+  btnCloseEl = viewChild<ElementRef<HTMLButtonElement>>('btnCloseRef');
 
-  constructor()
+  clientesService = inject(ClientesService);
+
+  #fb = inject(FormBuilder);
+  formCliente: FormGroup = this.#fb.group({
+    apellido: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    nombre: ['', [Validators.required, Validators.minLength(2)]],
+    saldo: [0, [Validators.required, Validators.min(0)]],
+  });
+
+  isModalVisible = signal<boolean>(false);
+
+  agregarCliente()
   {
-    this.#clientesService.clientes.subscribe(clients =>
-      this.clientes.set(clients)
-    );
+    if (this.formCliente.invalid)
+    {
+      this.formCliente.markAllAsTouched();
+      return;
+    }
+
+    this.clientesService.createClient(this.formCliente.value);
+
+    this.formCliente.reset();
+    this.#cerrarModal();
   }
 
   getSaldoTotal(): number
   {
     return (
-      this.clientes()?.reduce(
-        (total, cliente) => total + (cliente.saldo ?? 0),
-        0
-      ) ?? 0
+      this.clientesService
+        .clientes()
+        ?.reduce((total, cliente) => total + (cliente.saldo ?? 0), 0) ?? 0
     );
   }
+
+  #cerrarModal = () => this.btnCloseEl()?.nativeElement.click();
 }

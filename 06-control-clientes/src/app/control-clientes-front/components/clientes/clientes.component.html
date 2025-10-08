@@ -6,7 +6,6 @@
           class="btn btn-primary w-100"
           data-bs-target="#agregarClienteModal"
           data-bs-toggle="modal"
-          href="#"
         >
           <i class="bi bi-plus-circle"></i> Agregar Cliente
         </a>
@@ -32,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (cliente of clientes(); track cliente)
+              @for (cliente of clientesService.clientes(); track cliente.id)
               {
                 <tr>
                   <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
@@ -64,7 +63,8 @@
           <div class="card-body">
             <h3>Total Clientes</h3>
             <h4 class="display-4">
-              <i class="bi bi-people-fill"></i> {{ clientes()?.length }}
+              <i class="bi bi-people-fill"></i>
+              {{ clientesService.clientes().length }}
             </h4>
           </div>
         </div>
@@ -83,9 +83,11 @@
           data-bs-dismiss="modal"
           type="button"
           aria-label="Close"
+          #btnCloseRef
         ></button>
       </div>
-      <form>
+
+      <form [formGroup]="formCliente" (ngSubmit)="agregarCliente()">
         <div class="modal-body">
           <div class="d-flex align-items-center mb-3">
             <label
@@ -95,13 +97,22 @@
             >
               Nombre
             </label>
-            <input
-              class="form-control"
-              id="nombre"
-              name="nombre"
-              type="text"
-              required
-            />
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="nombre"
+              />
+              @if (
+                formCliente.controls['nombre'].invalid &&
+                formCliente.controls['nombre'].touched
+              )
+              {
+                <div class="text-danger">
+                  Nombre es requerido y debe tener al menos 2 caracteres
+                </div>
+              }
+            </div>
           </div>
 
           <div class="d-flex align-items-center mb-3">
@@ -112,43 +123,74 @@
             >
               Apellido
             </label>
-            <input
-              class="form-control"
-              id="apellido"
-              name="apellido"
-              type="text"
-              required
-            />
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="apellido"
+              />
+              @if (
+                formCliente.controls['apellido'].invalid &&
+                formCliente.controls['apellido'].touched
+              )
+              {
+                <div class="text-danger">
+                  Apellido es requerido y debe tener al menos 2 caracteres
+                </div>
+              }
+            </div>
           </div>
 
           <div class="d-flex align-items-center mb-3">
             <label class="form-label me-3" for="email" style="min-width: 100px">
               Email
             </label>
-            <input
-              class="form-control"
-              id="email"
-              name="email"
-              type="email"
-              required
-            />
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="email"
+                formControlName="email"
+              />
+              @if (
+                formCliente.controls['email'].invalid &&
+                formCliente.controls['email'].touched
+              )
+              {
+                <div class="text-danger">Por Favor Ingresa un Email Valido</div>
+              }
+            </div>
           </div>
 
           <div class="d-flex align-items-center mb-3">
             <label class="form-label me-3" for="saldo" style="min-width: 100px">
               Saldo
             </label>
-            <input
-              class="form-control"
-              id="saldo"
-              name="saldo"
-              type="number"
-              required
-            />
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="number"
+                formControlName="saldo"
+              />
+              @if (
+                formCliente.controls['saldo'].invalid &&
+                formCliente.controls['saldo'].touched
+              )
+              {
+                <div class="text-danger">
+                  El saldo es requerido y debe ser un numero positivo.
+                </div>
+              }
+            </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" type="submit">Guardar</button>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="formCliente.invalid"
+          >
+            Guardar
+          </button>
         </div>
       </form>
     </div>

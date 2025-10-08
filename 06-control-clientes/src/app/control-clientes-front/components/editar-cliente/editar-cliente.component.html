@@ -1,2 +1,143 @@
-<p>editar-cliente works!</p>
-,
+<header class="bg-info py-2 text-white" id="main-header">
+  <div class="container">
+    <h1><i class="bi bi-person"></i> Editar Cliente</h1>
+  </div>
+</header>
+
+<form [formGroup]="formUpdateClient" (ngSubmit)="updateClient()">
+  <section class="mb-4 py-4" id="actions">
+    <div class="d-flex justify-content-between container">
+      <a class="btn btn-primary" [routerLink]="['/']">
+        <i class="bi bi-arrow-left"></i> Regresar al Inicio
+      </a>
+      <button class="btn btn-success" type="submit">
+        <i class="bi bi-check"></i> Guardar Cliente
+      </button>
+      <a
+        class="btn btn-danger"
+        role="button"
+        (click)="deleteClient()"
+        tabindex="0"
+      >
+        <i class="bi bi-trash"></i> Eliminar Cliente
+      </a>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h4>Editar Cliente</h4>
+        </div>
+        <div class="card-body">
+          <div class="modal-body">
+            <div class="d-flex align-items-center mb-3">
+              <label
+                class="form-label me-3"
+                for="nombre"
+                style="min-width: 100px"
+              >
+                Nombre
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="nombre"
+                />
+                @if (
+                  formUpdateClient.controls['nombre'].invalid &&
+                  formUpdateClient.controls['nombre'].touched
+                )
+                {
+                  <div class="text-danger">
+                    Nombre es requerido y debe tener al menos 2 caracteres
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <label
+                class="form-label me-3"
+                for="apellido"
+                style="min-width: 100px"
+              >
+                Apellido
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="apellido"
+                />
+                @if (
+                  formUpdateClient.controls['apellido'].invalid &&
+                  formUpdateClient.controls['apellido'].touched
+                )
+                {
+                  <div class="text-danger">
+                    Apellido es requerido y debe tener al menos 2 caracteres
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <label
+                class="form-label me-3"
+                for="email"
+                style="min-width: 100px"
+              >
+                Email
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="email"
+                  formControlName="email"
+                />
+                @if (
+                  formUpdateClient.controls['email'].invalid &&
+                  formUpdateClient.controls['email'].touched
+                )
+                {
+                  <div class="text-danger">
+                    Por Favor Ingresa un Email Valido
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <label
+                class="form-label me-3"
+                for="saldo"
+                style="min-width: 100px"
+              >
+                Saldo
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="saldo"
+                />
+                @if (
+                  formUpdateClient.controls['saldo'].invalid &&
+                  formUpdateClient.controls['saldo'].touched
+                )
+                {
+                  <div class="text-danger">
+                    El saldo es requerido y debe ser un numero positivo.
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
