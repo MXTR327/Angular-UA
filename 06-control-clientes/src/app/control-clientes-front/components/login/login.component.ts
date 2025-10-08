@@ -25,7 +25,7 @@ export class LoginComponent
 
   _ = this.#loginService.getAuthState().subscribe(user =>
   {
-    if (user) this.#router.navigate(['/']);
+    if (user) this.#router.navigate(['/']); 
   });
 
   #fb = inject(FormBuilder);
