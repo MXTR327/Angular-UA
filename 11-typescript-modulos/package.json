@@ -1,0 +1,14 @@
+{
+  "name": "11-typescript-modulos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "modulos.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "./modulos.d.ts"
+}
