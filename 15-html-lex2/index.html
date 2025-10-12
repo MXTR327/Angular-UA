@@ -29,7 +29,9 @@
   </head>
   <!-- <body style="background-color: powderblue;">  -->
   <body style="background-color: honeydew">
-    <h1 style="font-size: 50px; font-family: 'Courier New', Courier, monospace">
+    <h1
+      id="inicio"
+      style="font-size: 50px; font-family: 'Courier New', Courier, monospace">
       Etiqueta H
     </h1>
     <h1>Titulo h1</h1>
@@ -72,7 +74,7 @@
       alt="Logo Javascript"
       width="100" />
 
-    <h1>Etiqueta Pre</h1>
+    <h1 id="eti-pre">Etiqueta Pre</h1>
     <pre>
         <b>Este es
         Nuestro nuevo parrafo con pre y b</b>
@@ -201,7 +203,7 @@
       </tr>
     </table>
 
-    <h1>Listas no ordenadas</h1>
+    <h1 id="li-ul">Listas no ordenadas</h1>
     <ul style="list-style-type: square">
       <li>
         Juan
@@ -264,10 +266,183 @@
       </span>
     </p>
     <h2>Elemento div (block)</h2>
-    <div>
+    <div class="div">
       <h3>Titulo del div</h3>
       <p>Texto dentro del div</p>
     </div>
     <p>Texto fuera del div</p>
+
+    <h1>Atributo Class</h1>
+    <div class="targeta">
+      <h2>Java</h2>
+      <p>Creador: James Gosling</p>
+    </div>
+    <div class="targeta">
+      <h2>Python</h2>
+      <p>Creador: Guido Van Rossum</p>
+    </div>
+    <div>
+      <h2>Javascript</h2>
+      <p>Creador: Brendan Eich</p>
+    </div>
+    <div class="targeta">
+      <h2>Resumen Lenguajes de Programacion</h2>
+      <p>www.globalmentoring.com.mx</p>
+    </div>
+
+    <h1 id="titulo-principal">Estilos por ID</h1>
+
+    <h1>Marcadores y bookmarks</h1>
+    <a href="#inicio">Ir al principio</a>
+    |
+    <a href="#eti-pre">Etiquetas Pre</a>
+    |
+    <a href="#li-ul">Listas no ordenadas</a>
+
+    <h1>Iframe en html</h1>
+    <iframe
+      src="pagina1.html"
+      name="marco1"
+      class="marco">
+      Pagina 1 html
+    </iframe>
+    <div style="text-align: center">
+      <a
+        class="btn-link"
+        href="https://ramsuaservices.vercel.app/"
+        target="marco1">
+        Cargar pagina jorge
+      </a>
+    </div>
+
+    <h1>Formularios html</h1>
+    <form
+      method="post"
+      action="mi_servidor"
+      method="post">
+      <fieldset>
+        <legend>Formulario de persona</legend>
+
+        <label for="persona">Persona:</label>
+        <input
+          type="text"
+          id="persona"
+          name="persona"
+          value="100" />
+        <br />
+
+        <label for="sistema">Hidden input: (esta aqui pero no se ve)</label>
+        <input
+          type="hidden"
+          id="sistema"
+          name="sistema"
+          value="SAP" />
+        <br />
+
+        <label for="nombre">Nombre: </label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Escribe tu nombre"
+          required />
+        <br />
+
+        <label for="apellido">Apellido: </label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          placeholder="Escribe tu apellido"
+          required />
+        <br />
+
+        <label for="edad">Edad: </label>
+        <input
+          type="number"
+          id="edad"
+          name="edad"
+          placeholder="Escribe tu edad"
+          required />
+        <br />
+
+        <label>Genero: </label><br />
+        <input
+          type="radio"
+          id="femenino"
+          name="genero"
+          value="femenino" />
+        <label for="femenino">Femenino</label>
+        <input
+          type="radio"
+          id="masculino"
+          name="genero"
+          value="masculino" />
+        <label for="masculino">Masculino</label>
+        <br />
+
+        <label>Genero musica favorita</label><br />
+        <input
+          type="checkbox"
+          id="clasica"
+          name="musica"
+          value="clasica" />
+        <label for="clasica">Clasica</label>
+        <input
+          type="checkbox"
+          id="jazz"
+          name="musica"
+          value="jazz" />
+        <label for="jazz">jazz</label>
+        <br />
+
+        <label for="autos">Marca de auto favorita:</label><br />
+        <select
+          id="autos"
+          name="autos">
+          <option value="volvo">Volvo</option>
+          <option value="bmw">BMW</option>
+          <option value="audi">Audi</option>
+        </select>
+        <br />
+
+        <label for="comentario">Comentario</label><br />
+        <textarea
+          id="comentario"
+          name="comentario"
+          rows="2"
+          cols="30"></textarea>
+        <br />
+
+        <label for="email">Email: </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Escribe tu email"
+          required />
+        <br />
+
+        <label for="password">Password: </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Escribe tu password"
+          required />
+        <br />
+
+        <input
+          type="submit"
+          value="Enviar" />
+        <input
+          type="submit"
+          formnovalidate="formnovalidate"
+          value="Enviar formulario sin validar" />
+        <input
+          type="reset"
+          value="Restablecer" />
+      </fieldset>
+    </form>
   </body>
 </html>
