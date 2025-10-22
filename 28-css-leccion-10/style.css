@@ -1,0 +1,24 @@
+h1 {
+  text-align: center;
+  color: crimson;
+}
+div.relativo {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  top: 10px;
+  left: 100px;
+  border: 3px solid cornflowerblue;
+}
+div.absoluto {
+  /* position: block; */
+  /* position: relative; */
+  /* position: fixed; */
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  /* width: 50%; */
+  /* max-width: 50%; */
+  /* margin: auto; */
+  border: 3px solid firebrick;
+}
