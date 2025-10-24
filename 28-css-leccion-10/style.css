@@ -22,3 +22,32 @@ div.absoluto {
   /* margin: auto; */
   border: 3px solid firebrick;
 }
+.sticky {
+  position: sticky;
+  top: 0;
+  border: 3px solid firebrick;
+}
+.estatico {
+  position: static;
+  top: 10px;
+  padding: 15px;
+  border: 3px solid greenyellow;
+  background-color: whitesmoke;
+}
+.relativo2 {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  padding: 15px;
+  border: 3px solid blueviolet;
+  background-color: whitesmoke;
+}
+.absoluto2{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 120px;
+  border: 3px solid cornflowerblue;
+  background-color: whitesmoke;
+  z-index: -1;
+}

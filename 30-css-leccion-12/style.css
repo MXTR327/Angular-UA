@@ -1,0 +1,42 @@
+* {
+  text-align: center;
+}
+h1 {
+  color: crimson;
+}
+
+div.contenedor_visible {
+  /* position: relative; */
+  border: 3px dashed greenyellow;
+  width: 30%;
+  height: 100px;
+  margin: auto;
+  overflow: visible;
+}
+
+div.contenedor_hidden {
+  /* position: relative; */
+  border: 3px dashed greenyellow;
+  width: 30%;
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+}
+
+div.contenedor_scroll {
+  /* position: relative; */
+  border: 3px dashed greenyellow;
+  width: 30%;
+  height: 100px;
+  margin: auto;
+  overflow: scroll;
+}
+
+div.contenedor_auto {
+  /* position: relative; */
+  border: 3px dashed greenyellow;
+  width: 30%;
+  height: 100px;
+  margin: auto;
+  overflow: auto;
+}
