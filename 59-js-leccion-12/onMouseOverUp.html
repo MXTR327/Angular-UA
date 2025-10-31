@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Manejo DOM con JavaScript</title>
+  </head>
+  <body>
+    <h1
+      id="titulo"
+      onmouseover="rojo(this)"
+      onmouseout="azul(this)">
+      Manejo DOM con JavaScript (Pasa el ratón por encima)
+    </h1>
+    <br />
+    <script>
+      function rojo(elemento) {
+        elemento.style.color = "red";
+      }
+      function azul(elemento) {
+        elemento.style.color = "blue";
+      }
+    </script>
+  </body>
+</html>

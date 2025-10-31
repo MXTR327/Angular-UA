@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Manejo DOM con JavaScript</title>
+  </head>
+  <body>
+    <h1 id="titulo">Manejo DOM con JavaScript (Dame click o mantenter)</h1>
+    <br />
+    <label for="nombre">Nombre: </label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      placeholder="Ingrese Nombre"
+      onfocus="cambiar(this)"
+      onblur="regresar(this)" />
+    <br /><br />
+    <label for="apellido">Apellido: </label>
+    <input
+      type="text"
+      id="apellido"
+      name="apellido"
+      placeholder="Ingrese Apellido"
+      onfocus="cambiar(this)"
+      onblur="regresar(this)" />
+    <script>
+      function cambiar(elemento) {
+        elemento.style.background = "yellow";
+      }
+      function regresar(elemento) {
+        elemento.style.background = "white";
+      }
+    </script>
+  </body>
+</html>

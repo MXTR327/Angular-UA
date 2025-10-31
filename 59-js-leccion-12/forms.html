@@ -9,14 +9,14 @@
   </head>
   <body>
     <form id="formulario">
-      Nombre:
+      <label for="nombre">Nombre: </label>
       <input
         type="text"
         id="nombre"
         name="nombre"
         placeholder="Ingrese Nombre" />
       <br />
-      Apellido:
+      <label for="apellido">Apellido: </label>
       <input
         type="text"
         id="apellido"
@@ -25,16 +25,19 @@
       <br />
     </form>
     <button onclick="mostrarValores()">Mostrar</button>
-
+    <div id="valores"></div>
     <script>
       function mostrarValores() {
         let formulario = document.forms["formulario"];
         let texto = "";
-
+        // let nombre = formulario["nombre"].value;
+        // let apellido = formulario["apellido"].value;
+        // texto = `${nombre} ${apellido}`;
         for (let elemento of formulario) {
-          texto += `${elemento.value} `
+          texto += `${elemento.value} `;
         }
-        alert(texto);
+
+        document.getElementById("valores").innerText = texto;
       }
     </script>
   </body>
